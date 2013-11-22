@@ -1,11 +1,13 @@
 #pragma once
 
 #if defined(_DEBUG) || defined(DEBUG)
+	#pragma comment(lib, "glew32.dll")
 	#pragma comment(lib, "sfml-window-s-d.lib")
 	#pragma comment(lib, "sfml-system-s-d.lib")
 	#pragma comment(lib, "sfml-graphics-s-d.lib")
 
 #else
+	#pragma comment(lib, "glew32.dll")
 	#pragma comment(lib, "sfml-window-s.lib")
 	#pragma comment(lib, "sfml-system-s.lib")
 	#pragma comment(lib, "sfml-graphics-s.lib")
