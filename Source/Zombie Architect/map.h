@@ -1,5 +1,5 @@
-#ifndef _MAP_HPP
-#define _MAP_HPP
+#ifndef _MAP_H
+#define _MAP_H
 
 #include <SFML\Graphics.hpp>
 
