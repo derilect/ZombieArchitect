@@ -25,8 +25,15 @@ int CALLBACK WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 	sprite.setPosition(100,100);
 
 	ShaderProgram shader;
-	shader.initialize("./Shaders/vertex_shader.vert", "./Shaders/pixel_shader.frag");
+	if(!shader.initialize("./Shaders/vertex_shader.vert", "./Shaders/pixel_shader.frag"))
+		return 0;
 
+	sf::Shader sh;
+
+
+
+	if(!sh.loadFromFile("./Shaders/vertex_shader.vert", "./Shaders/pixel_shader.frag"))
+		return 0;
 
 	if(!font.loadFromFile("Fonts\\Times.ttf"))
 	{
@@ -39,10 +46,6 @@ int CALLBACK WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 	text.setColor(sf::Color::Red);
 	text.setStyle(sf::Text::Bold);
 
-	//VBO Testing
-	GLuint vba = glBindVertexArray(NULL);
-
-	// End VBO Testing
 	while(window.isOpen())
 	{
 		window.clear();
@@ -58,10 +61,13 @@ int CALLBACK WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 			if(event.type == sf::Event::Closed)
 				window.close();
 		}
+			
+		sf::Shader::bind(&sh);
 
-		shader.begin();
 		window.draw(sprite);
-		shader.end();
+
+		sf::Shader::bind(NULL);
+
 
 		if(sf::Mouse::getPosition(window).x < 0)
 			sf::Mouse::setPosition(sf::Vector2i(0,sf::Mouse::getPosition(window).y), window);
